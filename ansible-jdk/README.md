@@ -1,3 +1,9 @@
+TASK : CS,MS1,3,5(JDK8), MS2,4(JDK17)
+-Create control server and manage server 
+-install jdk8 on ms1 ms5 
+install jdk8 on ms2 ms4 
+
+
 Step 1 : Create Control Server and Managed server 
 
 Set up of cs ms1 ms2 ms3 ms4 ms5

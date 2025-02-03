@@ -1,0 +1,15 @@
+hostfile #/etc/ansible/hosts
+
+
+[WS1]
+ms1 ansible_host=3.7.70.71 ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/mujahed.pem
+
+ms3 ansible_host=15.206.210.58 ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/mujahed.pem
+
+ms5 ansible_host=13.201.226.51 ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/mujahed.pem
+
+
+[WS2]
+ms2 ansible_host=3.108.58.242  ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/mujahed.pem
+
+ms4 ansible_host=13.203.159.243 ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/mujahed.pem

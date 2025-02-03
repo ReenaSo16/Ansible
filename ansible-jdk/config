@@ -1,0 +1,29 @@
+Host cs
+    HostName 3.6.126.32
+    User ubuntu
+    IdentityFile /home/ubuntu/.ssh/mujahed.pem
+
+Host ms1
+    HostName 3.7.70.71
+    User ubuntu
+    IdentityFile /home/ubuntu/.ssh/mujahed.pem
+
+Host ms2
+    HostName 3.108.58.242
+    User ubuntu
+    IdentityFile /home/ubuntu/.ssh/mujahed.pem
+
+Host ms3
+    HostName 15.206.210.58
+    User ubuntu
+    IdentityFile /home/ubuntu/.ssh/mujahed.pem
+
+Host ms4
+    HostName 3.203.159.243
+    User ubuntu
+    IdentityFile /home/ubuntu/.ssh/mujahed.pem
+
+Host ms5
+    HostName 13.201.226.51
+    User ubuntu
+    IdentityFile /home/ubuntu/.ssh/mujahed.pem

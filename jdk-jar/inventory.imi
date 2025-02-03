@@ -1,0 +1,11 @@
+
+group to install jdk17, mvn pgsql, clone and build
+
+[WS1]
+ms1
+cs
+
+#group to upload jar file to s3
+
+[WS2]
+ms2

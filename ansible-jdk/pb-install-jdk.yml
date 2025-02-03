@@ -1,0 +1,29 @@
+- hosts: WS1
+  tasks:
+    - name: Update APT package manager repositories cache
+      become: yes
+      apt:
+        update_cache: yes
+
+    - name: Install OpenJDK Java 8
+      become: yes
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - openjdk-8-jdk
+
+- hosts: WS2
+  tasks:
+    - name: Update APT package manager repositories cache
+      become: yes
+      apt:
+        update_cache: yes
+
+    - name: Install OpenJDK Java 17
+      become: yes
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - openjdk-17-jdk

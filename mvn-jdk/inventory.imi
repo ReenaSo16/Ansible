@@ -1,0 +1,25 @@
+hostfile sudo vi /etc/hosts
+
+#group for install jdk8
+
+[WS1]
+ms1
+
+#group for install jdk17
+
+[WS2]
+ms2
+
+#group for install jdk17 mvn ,git , git clone install in cs , ms1 ,ms2
+
+[ws3]
+cs
+ms1
+ms2
+
+
+
+
+
+
+

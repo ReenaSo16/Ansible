@@ -1,13 +1,13 @@
 [CS]
 CS ansible_python_interpreter=/usr/bin/python3.12
-#CS ansible_host=34.227.60.238 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/mujahed.pem
+#CS ansible_host=13.127.239.154 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/mujahed.pem
 
 
 
 [ws1]
 MS1 ansible_python_interpreter=/usr/bin/python3.12
-#MS1 ansible_host=54.160.166.31 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/mujahed.pem
+#MS1 ansible_host=35.154.224.43 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/mujahed.pem
 
 [ws2]
 MS2 ansible_python_interpreter=/usr/bin/python3.12
-#MS2 ansible_host=3.94.165.14 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/mujahed.pem
+#MS2 ansible_host=65.0.7.159 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/mujahed.pem

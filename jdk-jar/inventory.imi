@@ -1,11 +1,13 @@
+[CS]
+CS ansible_python_interpreter=/usr/bin/python3.12
+#CS ansible_host=34.227.60.238 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/mujahed.pem
 
-group to install jdk17, mvn pgsql, clone and build
 
-[WS1]
-ms1
-cs
 
-#group to upload jar file to s3
+[ws1]
+MS1 ansible_python_interpreter=/usr/bin/python3.12
+#MS1 ansible_host=54.160.166.31 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/mujahed.pem
 
-[WS2]
-ms2
+[ws2]
+MS2 ansible_python_interpreter=/usr/bin/python3.12
+#MS2 ansible_host=3.94.165.14 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/mujahed.pem

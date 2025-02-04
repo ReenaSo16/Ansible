@@ -1,0 +1,155 @@
+---
+
+- name: Setup Environment and Web Application
+  hosts: ws1
+  become: yes
+  vars:
+    packages:
+      - openjdk-17-jdk
+      - maven
+      - git
+  tasks:
+    - name: Update APT cache
+      apt:
+        update_cache: yes
+
+    - name: Install Java, Maven, and Git
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ packages }}"
+
+    - name: Install PostgreSQL and dependencies
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - postgresql
+        - postgresql-contrib
+        - python3-psycopg2
+
+    - name: Start and enable PostgreSQL service
+      service:
+        name: postgresql
+        state: started
+        enabled: yes
+
+    - name: Clone the Git repository
+      git:
+        repo: "https://github.com/ReenaSo16/JavaConsole.git"
+        dest: /home/ubuntu/webapp
+        version: main
+        update: yes
+
+    - name: Build the application
+      shell: |
+        mvn clean
+        mvn package
+      args:
+        chdir: /home/ubuntu/webapp
+
+- name: Copy Webapp to Localhost
+  hosts: ws1
+  become: yes
+  tasks:
+    - name: Fetch the built webapp from ws1
+      fetch:
+        src: /home/ubuntu/webapp/target/msexcel-0.0.1-SNAPSHOT.jar
+        dest: /tmp/msexcel-0.0.1-SNAPSHOT.jar
+        flat: yes
+
+- name: Copy Webapp to MS2 Another Server using SCP
+  hosts: ws
+  tasks:
+    - name: Copy webapp jar to remote server
+      ansible.builtin.command:
+        cmd: >
+          scp -i /home/ubuntu/.ssh/mujahed.pem
+          /tmp/msexcel-0.0.1-SNAPSHOT.jar
+          ubuntu@65.0.7.159:/home/ubuntu/
+
+
+
+- name: Install and Configure AWS CLI on ws2
+  hosts: ws2
+  become: yes
+  vars_files:
+    - aws_credentials.yml
+  tasks:
+    - name: Update APT cache
+      apt:
+        update_cache: yes
+
+    - name: Install unzip and curl
+      apt:
+        name:
+          - unzip
+          - curl
+        state: present
+
+    - name: Download AWS CLI
+      get_url:
+        url: "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
+        dest: "/tmp/awscliv2.zip"
+
+    - name: Extract AWS CLI
+      unarchive:
+        src: "/tmp/awscliv2.zip"
+        dest: "/tmp"
+        remote_src: yes
+
+    - name: Install AWS CLI
+      command: "/tmp/aws/install --update"
+
+    - name: Ensure the .aws directory exists
+      file:
+        path: "/home/ubuntu/.aws"
+        state: directory
+        mode: "0700"
+        owner: ubuntu
+        group: ubuntu
+
+    - name: Configure AWS credentials
+      copy:
+        content: |
+          [default]
+          aws_access_key_id = {{ aws_access_key_id }}
+          aws_secret_access_key = {{ aws_secret_access_key }}
+        dest: "/home/ubuntu/.aws/credentials"
+        mode: "0600"
+        owner: ubuntu
+        group: ubuntu
+
+    - name: Configure AWS region and output format
+      copy:
+        content: |
+          [default]
+          region = ap-south-1
+          output = json
+        dest: "/home/ubuntu/.aws/config"
+        mode: "0600"
+        owner: ubuntu
+        group: ubuntu
+
+    - name: Create S3 bucket named "reena14"
+      amazon.aws.s3_bucket:
+        name: reena14
+        region: ap-south-1
+        state: present
+      environment:
+        AWS_ACCESS_KEY_ID: "{{ aws_access_key_id }}"
+        AWS_SECRET_ACCESS_KEY: "{{ aws_secret_access_key }}"
+
+    - name: Upload JAR file to S3 bucket
+      amazon.aws.aws_s3:
+        bucket: reena14
+        object: msexcel-0.0.1-SNAPSHOT.jar
+        src: /home/ubuntu/msexcel-0.0.1-SNAPSHOT.jar
+        mode: put
+      environment:
+        AWS_ACCESS_KEY_ID: "{{ aws_access_key_id }}"
+        AWS_SECRET_ACCESS_KEY: "{{ aws_secret_access_key }}"
+
+
+
+

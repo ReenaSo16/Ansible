@@ -1,0 +1,14 @@
+Host CS
+    HostName 13.127.239.154
+    User ubuntu
+    IdentityFile /home/ubuntu/.ssh/mujahed.pem
+
+Host MS1
+    HostName 35.154.224.43
+    User ubuntu
+    IdentityFile /home/ubuntu/.ssh/mujahed.pem
+
+Host MS2
+    HostName 65.0.7.159
+    User ubuntu
+    IdentityFile /home/ubuntu/.ssh/mujahed
